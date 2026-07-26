@@ -8,7 +8,7 @@ from datetime import datetime
 from pathlib import Path
 
 from src.collectors.base import EventRecord
-from src.collectors.web_search import TopicSearchCollector
+from src.collectors.real_search import RealSearchCollector
 from src.filters.dedup import Deduplicator
 from src.filters.quality import QualityFilter
 from src.filters.scorer import Scorer
@@ -76,7 +76,8 @@ def run_weekly(config: dict):
 
     for source_key, source_cfg in enabled_sources.items():
         try:
-            collector = TopicSearchCollector(config, source_key)
+            collector = RealSearchCollector(config, source_key)
+            collector.gh_token = os.environ.get("GH_TOKEN", "")
             items = collector.collect()
             for item in items:
                 item.categories = _auto_categorize(item, config)
