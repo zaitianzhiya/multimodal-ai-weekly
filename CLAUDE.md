@@ -11,7 +11,7 @@ This project is a domain-specific application of the methodology from `github-we
 ## Architecture
 
 ```
-28 sources → TopicSearchCollector → Merge/Dedup → 6-dim Score → DeepAnalyzer (LLM) → MarkdownRenderer → GitHub Actions commit
+28 sources → RealSearchCollector → Merge/Dedup → 6-dim Score → DeepAnalyzer (LLM) → MarkdownRenderer → GitHub Actions commit
      (11 ecosystems, Tier 1/2, 5 modalities)      |                 |                   |
                                                    v                 v                   v
                                               Confidence A/B/C/D  "No naked jargon"   weekly/YYYY-NN.md
@@ -22,7 +22,7 @@ This project is a domain-specific application of the methodology from `github-we
 
 | Module | Path | Purpose |
 |--------|------|---------|
-| Collectors | `src/collectors/` | `base.py` (EventRecord, SourceCitation), `web_search.py` (TopicSearchCollector) |
+| Collectors | `src/collectors/` | `base.py` (EventRecord, SourceCitation), `web_search.py` (RealSearchCollector) |
 | Filters | `src/filters/` | `dedup.py`, `quality.py`, `scorer.py` |
 | AI | `src/ai/` | `llm_client.py` (multi-provider), `deep_analyzer.py`, `feedback_loader.py` |
 | Render | `src/render/` | `markdown_weekly.py` |
