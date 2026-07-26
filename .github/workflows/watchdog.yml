@@ -1,0 +1,45 @@
+name: Watchdog — Multimodal AI
+
+on:
+  schedule:
+    - cron: '0 6 * * 1'     # 周一 UTC 6:00
+    - cron: '40 10 * * 1'   # 周一 UTC 10:40
+    - cron: '0 14 * * 1'    # 周一 UTC 14:00
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+
+      - name: Check if weekly report exists
+        id: check
+        run: |
+          WEEK=$(date +%Y-W%V)
+          REPORT="output/weekly/$(date +%Y)/${WEEK}.md"
+          echo "Checking: $REPORT"
+          if [ -f "$REPORT" ]; then
+            echo "EXISTS=true" >> $GITHUB_OUTPUT
+            echo "✅ Report exists: $REPORT"
+          else
+            echo "EXISTS=false" >> $GITHUB_OUTPUT
+            echo "❌ Missing report: $REPORT — will trigger weekly workflow"
+          fi
+
+      - name: Trigger weekly workflow
+        if: steps.check.outputs.EXISTS == 'false'
+        uses: actions/github-script@v7
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+          script: |
+            await github.rest.actions.createWorkflowDispatch({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: 'weekly-digest.yml',
+              ref: context.ref,
+            });
+            console.log('Triggered weekly-digest.yml');

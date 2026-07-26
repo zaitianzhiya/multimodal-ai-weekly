@@ -1,0 +1,315 @@
+# 多模态AI周报 — 信息源配置
+# tier: 1 = 原始数据源, 2 = 引用数据源
+# ecosystem: 用于来源独立性权重修正
+# modality: 模态覆盖标记 (vision/audio/video/3D/omni)
+
+sources:
+  # === Tier 1: 全球头部大模型企业官方 (7源) ===
+  openai_multimodal:
+    name: "OpenAI GPT 多模态"
+    tier: 1
+    ecosystem: "us_bigtech"
+    type: web_search
+    enabled: true
+    frequency: weekly
+    keywords: ["GPT-5o", "GPT image", "GPT vision", "OpenAI video", "Sora", "DALL-E", "GPT audio"]
+    modality: ["vision", "video", "audio", "omni"]
+
+  google_deepmind:
+    name: "Google DeepMind Gemini"
+    tier: 1
+    ecosystem: "us_bigtech"
+    type: web_search
+    enabled: true
+    frequency: weekly
+    keywords: ["Gemini", "Gemini vision", "Gemini multimodal", "Veo", "Imagen", "Google DeepMind multimodal"]
+    modality: ["vision", "video", "audio", "omni"]
+
+  anthropic_claude:
+    name: "Anthropic Claude"
+    tier: 1
+    ecosystem: "us_bigtech"
+    type: web_search
+    enabled: true
+    frequency: weekly
+    keywords: ["Claude vision", "Claude multimodal", "Anthropic visual", "Claude image"]
+    modality: ["vision"]
+
+  meta_ai:
+    name: "Meta Multimodal AI"
+    tier: 1
+    ecosystem: "us_bigtech"
+    type: web_search
+    enabled: true
+    frequency: weekly
+    keywords: ["Meta multimodal", "Llama vision", "Meta video", "Movie Gen", "Meta audio", "Meta image"]
+    modality: ["vision", "video", "audio"]
+
+  deepseek_vl:
+    name: "DeepSeek 多模态"
+    tier: 1
+    ecosystem: "cn_llm"
+    type: web_search
+    enabled: true
+    frequency: weekly
+    keywords: ["DeepSeek-VL", "DeepSeek multimodal", "DeepSeek vision", "Janus"]
+    modality: ["vision", "omni"]
+
+  qwen_vl:
+    name: "通义千问 VL"
+    tier: 1
+    ecosystem: "cn_bigtech"
+    type: web_search
+    enabled: true
+    frequency: weekly
+    keywords: ["Qwen-VL", "通义千问视觉", "Qwen multimodal", "Qwen omni", "Qwen audio", "万相"]
+    modality: ["vision", "audio", "omni"]
+
+  zhipu_glm:
+    name: "智谱 GLM 多模态"
+    tier: 1
+    ecosystem: "cn_llm"
+    type: web_search
+    enabled: true
+    frequency: weekly
+    keywords: ["智谱", "GLM-5", "CogView", "GLM vision", "ChatGLM visual", "CogVideo", "智谱多模态"]
+    modality: ["vision", "video", "omni"]
+
+  # === Tier 1: 专业多模态公司 (4源) ===
+  midjourney:
+    name: "Midjourney"
+    tier: 1
+    ecosystem: "image_gen"
+    type: web_search
+    enabled: true
+    frequency: weekly
+    keywords: ["Midjourney", "Midjourney V7", "Midjourney image"]
+    modality: ["vision"]
+
+  bfl_flux:
+    name: "Black Forest Labs (FLUX)"
+    tier: 1
+    ecosystem: "image_gen"
+    type: web_search
+    enabled: true
+    frequency: weekly
+    keywords: ["FLUX", "FLUX Pro", "FLUX 3", "Black Forest Labs"]
+    modality: ["vision"]
+
+  kuaishou_kling:
+    name: "快手可灵 (Kling)"
+    tier: 1
+    ecosystem: "cn_video_gen"
+    type: web_search
+    enabled: true
+    frequency: weekly
+    keywords: ["可灵", "Kling", "Kling video", "快手视频生成"]
+    modality: ["video"]
+
+  runway:
+    name: "Runway (Gen-4)"
+    tier: 1
+    ecosystem: "video_gen"
+    type: web_search
+    enabled: true
+    frequency: weekly
+    keywords: ["Runway", "Gen-4", "Runway video", "RunwayML"]
+    modality: ["video"]
+
+  # === Tier 1: 学术界 (1源) ===
+  arxiv_multimodal:
+    name: "arXiv Multimodal AI"
+    tier: 1
+    ecosystem: "academia"
+    type: rss
+    url: "http://export.arxiv.org/rss/cs.CV"
+    enabled: true
+    frequency: daily
+    max_items: 20
+    filter_keywords: ["multimodal", "vision-language", "visual grounding", "image generation", "video generation", "text-to-image", "text-to-video", "vision-language-action"]
+
+  # === Tier 2: 中国科技媒体 (5源) ===
+  media_36kr_mm:
+    name: "36氪 多模态AI"
+    tier: 2
+    ecosystem: "cn_tech_media"
+    type: web_search
+    enabled: true
+    frequency: weekly
+    keywords: ["多模态", "视觉大模型", "视频生成", "图像生成", "语音识别"]
+
+  media_jiqizhixin_mm:
+    name: "机器之心"
+    tier: 2
+    ecosystem: "cn_tech_media"
+    type: web_search
+    enabled: true
+    frequency: weekly
+    keywords: ["多模态", "视觉理解", "视频生成", "语音交互"]
+
+  media_liangzwei_mm:
+    name: "量子位"
+    tier: 2
+    ecosystem: "cn_tech_media"
+    type: web_search
+    enabled: true
+    frequency: weekly
+    keywords: ["多模态", "视觉", "视频生成", "语音模型"]
+
+  media_ithome_mm:
+    name: "IT之家"
+    tier: 2
+    ecosystem: "cn_tech_media"
+    type: web_search
+    enabled: true
+    frequency: weekly
+    keywords: ["多模态", "视觉AI", "视频生成AI", "图像生成"]
+
+  media_leiphone_mm:
+    name: "雷锋网"
+    tier: 2
+    ecosystem: "cn_tech_media"
+    type: web_search
+    enabled: true
+    frequency: weekly
+    keywords: ["多模态", "视觉语言", "视频生成", "AI语音"]
+
+  # === Tier 2: 英文科技媒体 (3源) ===
+  media_techcrunch_mm:
+    name: "TechCrunch AI"
+    tier: 2
+    ecosystem: "en_tech_media"
+    type: web_search
+    enabled: true
+    frequency: weekly
+    keywords: ["multimodal AI", "vision language model", "video generation AI", "image generation"]
+
+  media_theverge_mm:
+    name: "The Verge AI"
+    tier: 2
+    ecosystem: "en_tech_media"
+    type: web_search
+    enabled: true
+    frequency: weekly
+    keywords: ["multimodal", "vision AI", "GPT image", "Gemini vision", "Sora"]
+
+  media_venturebeat_mm:
+    name: "VentureBeat AI"
+    tier: 2
+    ecosystem: "en_tech_media"
+    type: web_search
+    enabled: true
+    frequency: weekly
+    keywords: ["multimodal AI", "vision language model", "video generation"]
+
+  # === Tier 2: 行业研究 (3源) ===
+  research_futureagi:
+    name: "FutureAGI 模型评测"
+    tier: 2
+    ecosystem: "industry_research"
+    type: web_search
+    enabled: true
+    frequency: weekly
+    keywords: ["multimodal model benchmark", "visual language model comparison", "video model benchmark"]
+
+  research_pandaily:
+    name: "Pandaily AI研究"
+    tier: 2
+    ecosystem: "industry_research"
+    type: web_search
+    enabled: true
+    frequency: weekly
+    keywords: ["image generation review", "video generation models", "multimodal AI China"]
+
+  research_idc_mm:
+    name: "IDC 多模态研究"
+    tier: 2
+    ecosystem: "industry_research"
+    type: web_search
+    enabled: true
+    frequency: weekly
+    keywords: ["multimodal AI market", "vision AI forecast", "video generation market"]
+
+  # === Tier 2: 开源社区 (2源) ===
+  huggingface_mm:
+    name: "HuggingFace 多模态"
+    tier: 2
+    ecosystem: "open_source"
+    type: web_search
+    enabled: true
+    frequency: weekly
+    keywords: ["multimodal model", "vision language model", "image generation model", "video generation open source"]
+
+  github_mm:
+    name: "GitHub 多模态项目"
+    tier: 2
+    ecosystem: "open_source"
+    type: web_search
+    enabled: true
+    frequency: weekly
+    keywords: ["multimodal AI", "VLM", "vision language", "image generation", "video generation", "TTS open source", "speech recognition open source"]
+
+# 生态分组（用于独立性权重修正）
+ecosystems:
+  us_bigtech:
+    name: "美国科技巨头"
+    sources: ["openai_multimodal", "google_deepmind", "anthropic_claude", "meta_ai"]
+    independence_weight: 1.0
+  cn_bigtech:
+    name: "中国科技巨头"
+    sources: ["qwen_vl"]
+    independence_weight: 1.0
+  cn_llm:
+    name: "中国大模型创业"
+    sources: ["deepseek_vl", "zhipu_glm"]
+    independence_weight: 1.0
+  image_gen:
+    name: "图像生成"
+    sources: ["midjourney", "bfl_flux"]
+    independence_weight: 1.0
+  video_gen:
+    name: "视频生成"
+    sources: ["runway"]
+    independence_weight: 1.0
+  cn_video_gen:
+    name: "中国视频生成"
+    sources: ["kuaishou_kling"]
+    independence_weight: 1.0
+  academia:
+    name: "学术界"
+    sources: ["arxiv_multimodal"]
+    independence_weight: 1.0
+  cn_tech_media:
+    name: "中国科技媒体"
+    sources: ["media_36kr_mm", "media_jiqizhixin_mm", "media_liangzwei_mm", "media_ithome_mm", "media_leiphone_mm"]
+    independence_weight: 0.6
+  en_tech_media:
+    name: "英文科技媒体"
+    sources: ["media_techcrunch_mm", "media_theverge_mm", "media_venturebeat_mm"]
+    independence_weight: 0.7
+  industry_research:
+    name: "行业研究"
+    sources: ["research_futureagi", "research_pandaily", "research_idc_mm"]
+    independence_weight: 0.8
+  open_source:
+    name: "开源社区"
+    sources: ["huggingface_mm", "github_mm"]
+    independence_weight: 0.8
+
+# 模态覆盖
+modalities:
+  vision:
+    name: "视觉理解"
+    description: "图像/视频理解、OCR、视觉问答、视觉定位"
+  audio:
+    name: "语音与音频"
+    description: "语音识别/合成/理解、音乐生成、声音事件检测"
+  video:
+    name: "视频生成"
+    description: "文生视频、图生视频、视频编辑、视频续写"
+  image_gen:
+    name: "图像生成"
+    description: "文生图、图生图、图像编辑、风格迁移"
+  omni:
+    name: "全模态统一"
+    description: "any-to-any模型、统一多模态架构、跨模态理解生成"

@@ -1,0 +1,125 @@
+# 多模态AI — 关键词配置
+# 控制事件筛选的优先级和倾向
+
+# 正向加权关键词
+positive_keywords:
+  # 核心能力
+  - "multimodal understanding"
+  - "visual grounding"
+  - "视觉理解"
+  - "多模态推理"
+  - "cross-modal"
+  - "any-to-any"
+  - "全模态"
+  - "omni-modal"
+  - "unified architecture"
+  - "融合"
+
+  # 图像
+  - "image generation"
+  - "text-to-image"
+  - "文生图"
+  - "image editing"
+  - "inpainting"
+  - "photorealistic"
+  - "可控生成"
+
+  # 视频
+  - "video generation"
+  - "text-to-video"
+  - "文生视频"
+  - "video editing"
+  - "video understanding"
+  - "实时视频"
+
+  # 语音
+  - "speech recognition"
+  - "speech synthesis"
+  - "TTS"
+  - "voice cloning"
+  - "语音合成"
+  - "voice assistant"
+  - "实时语音"
+
+  # 突破
+  - "SOTA"
+  - "state-of-the-art"
+  - "首次"
+  - "突破"
+  - "开源"
+  - "open source"
+  - "benchmark"
+
+# 负向降权关键词
+negative_keywords:
+  - "股价"
+  - "涨停"
+  - "跌停"
+  - "概念炒作"
+  - "营销号"
+  - "广告"
+
+# 重点关注企业
+tracked_organizations:
+  # 全球头部
+  - name: "OpenAI"
+    aliases: ["G��T-5", "Sora", "DALL-E", "ChatGPT"]
+    priority: "critical"
+
+  - name: "Google DeepMind"
+    aliases: ["Gemini", "Veo", "Imagen", "Google"]
+    priority: "critical"
+
+  - name: "Anthropic"
+    aliases: ["Claude", "Claude vision"]
+    priority: "critical"
+
+  - name: "Meta AI"
+    aliases: ["Meta", "Llama vision", "Movie Gen"]
+    priority: "high"
+
+  # 中国头部
+  - name: "通义千问"
+    aliases: ["Qwen-VL", "Qwen", "通义", "万相"]
+    priority: "critical"
+
+  - name: "DeepSeek"
+    aliases: ["DeepSeek-VL", "DeepSeek", "Janus"]
+    priority: "critical"
+
+  - name: "智谱AI"
+    aliases: ["GLM", "ChatGLM", "CogView", "CogVideo"]
+    priority: "critical"
+
+  - name: "腾讯混元"
+    aliases: ["混元", "Hunyuan"]
+    priority: "high"
+
+  # 专业公司
+  - name: "Midjourney"
+    aliases: ["Midjourney", "MJ"]
+    priority: "high"
+
+  - name: "Black Forest Labs"
+    aliases: ["FLUX", "BFL"]
+    priority: "high"
+
+  - name: "快手可灵"
+    aliases: ["Kling", "可灵"]
+    priority: "high"
+
+  - name: "Runway"
+    aliases: ["Runway", "Gen-4", "Gen-3"]
+    priority: "high"
+
+  - name: "Stability AI"
+    aliases: ["Stable Diffusion", "SD", "Stability"]
+    priority: "medium"
+
+  - name: "字节跳动"
+    aliases: ["豆包", "ByteDance", "即梦"]
+    priority: "medium"
+
+  - name: "百度"
+    aliases: ["文心", "ERNIE", "ERNIE-ViLG"]
+    priority: "medium"

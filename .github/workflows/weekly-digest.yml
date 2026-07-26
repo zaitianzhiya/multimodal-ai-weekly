@@ -1,0 +1,40 @@
+name: Weekly Multimodal AI Digest
+
+on:
+  schedule:
+    - cron: '47 10 * * 1'   # 每周一 UTC 10:47 = 北京时间 18:47
+  workflow_dispatch:
+
+concurrency:
+  group: multimodal-weekly
+  cancel-in-progress: false
+
+jobs:
+  digest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Generate weekly report
+        run: python run.py --mode weekly
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "actions@github.com"
+          git add -f output/
+          git diff --cached --quiet || git commit -m "Weekly: $(date +%Y-W%V) 多模态AI周报"
+          git push

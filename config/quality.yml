@@ -1,0 +1,138 @@
+# 多模态AI — 评价体系配置
+
+# 六维影响力权重
+weights:
+  technical_breakthrough: 25  # 技术突破度 — 多模态理解/生成能力的本质提升
+  industry_impact: 25         # 行业影响力 — 对多模态产业格局的冲击
+  ecosystem_value: 20         # 生态价值 — 开源/API 开放对开发者生态的价值
+  model_capability: 15        # 模型能力 — 在基准测试和实际体验中的表现
+  business_signal: 10         # 商业信号 — 融资/收购/人才流动/战略调整
+  time_sensitivity: 5         # 时间敏感性 — 事件的即时性和不可逆性
+
+# 置信度等级
+confidence:
+  grade_a:
+    threshold: 80
+    label: "A"
+    description: "多源交叉验证，至少1个Tier 1官方 + 2个Tier 2独立来源确认"
+  grade_b:
+    threshold: 60
+    label: "B"
+    description: "单一Tier 1官方源或两个独立Tier 2源，基本可信"
+  grade_c:
+    threshold: 40
+    label: "C"
+    description: "单一Tier 2源，需后续追踪确认"
+  grade_d:
+    threshold: 0
+    label: "D"
+    description: "信号微弱，仅供参考"
+
+# 质量过滤
+filters:
+  exclude_fork: true
+  max_inactive_days: 90
+  require_license: false
+  min_readme_length: 0
+
+# 六维分类体系
+categories:
+  - id: "vision_understanding"
+    name: "视觉理解"
+    label: "#vision"
+    description: "图像/视频理解、OCR、视觉问答、视觉定位、视觉推理"
+
+  - id: "image_generation"
+    name: "图像生成"
+    label: "#image-gen"
+    description: "文生图、图生图、图像编辑、风格迁移、可控生成"
+
+  - id: "video_generation"
+    name: "视频生成"
+    label: "#video-gen"
+    description: "文生视频、图生视频、视频编辑、视频续写、实时视频"
+
+  - id: "audio_speech"
+    name: "语音与音频"
+    label: "#audio"
+    description: "语音识别、语音合成、音乐生成、音频理解、声纹"
+
+  - id: "omni_architecture"
+    name: "全模态统一架构"
+    label: "#omni"
+    description: "any-to-any模型、统一多模态架构、跨模态融合、全模态理解"
+
+  - id: "industry_ecosystem"
+    name: "产业生态"
+    label: "#industry"
+    description: "融资、收购、人才、战略调整、开源发布、API 开放"
+
+# 自动分类关键词映射
+category_mapping:
+  vision_understanding:
+    - "视觉理解"
+    - "visual understanding"
+    - "OCR"
+    - "视觉问答"
+    - "visual question"
+    - "visual grounding"
+    - "image caption"
+    - "视觉定位"
+    - "document understanding"
+    - "chart understanding"
+  image_generation:
+    - "image generation"
+    - "文生图"
+    - "text-to-image"
+    - "DALL-E"
+    - "Midjourney"
+    - "FLUX"
+    - "Stable Diffusion"
+    - "inpainting"
+    - "图像编辑"
+    - "style transfer"
+    - "CogView"
+  video_generation:
+    - "video generation"
+    - "文生视频"
+    - "text-to-video"
+    - "Sora"
+    - "Veo"
+    - "Kling"
+    - "可灵"
+    - "Runway"
+    - "Movie Gen"
+    - "CogVideo"
+    - "视频编辑"
+    - "video editing"
+  audio_speech:
+    - "speech recognition"
+    - "语音识别"
+    - "TTS"
+    - "语音合成"
+    - "voice cloning"
+    - "music generation"
+    - "音频理解"
+    - "ASR"
+    - "voice assistant"
+  omni_architecture:
+    - "any-to-any"
+    - "omni-modal"
+    - "全模态"
+    - "unified architecture"
+    - "统一架构"
+    - "cross-modal fusion"
+    - "跨模态融合"
+    - "multimodal transformer"
+    - "multimodal LLM"
+    - "视觉-语言-语音统一"
+  industry_ecosystem:
+    - "融资"
+    - "收购"
+    - "IPO"
+    - "开源"
+    - "API"
+    - "人才"
+    - "战略"
+    - "组织架构"
+    - "reorganization"
