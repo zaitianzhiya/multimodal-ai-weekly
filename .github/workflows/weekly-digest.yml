@@ -2,7 +2,7 @@ name: Weekly Multimodal AI Digest
 
 on:
   schedule:
-    - cron: '47 10 * * 1'   # 每周一 UTC 10:47 = 北京时间 18:47
+    - cron: '25 10 * * 1'
   workflow_dispatch:
 
 concurrency:

@@ -80,21 +80,61 @@ def _generate_cn_titles(records: list[EventRecord]) -> None:
         ("DeepSeek", "DeepSeek"), ("OpenAI", "OpenAI"),
         ("Google", "谷歌"), ("Microsoft", "微软"),
         ("Amazon", "亚马逊"), ("Meta", "Meta"),
-        ("NVIDIA", "英伟达"), ("Nvidia", "英伟达"),
+        ("NVIDIA", "英伟达"), ("Nvidia", "英伟达"), ("Nvidia's", "英伟达"),
         ("Apple", "苹果"), ("Tesla", "特斯拉"),
         ("Samsung", "三星"), ("Sony", "索尼"),
+        ("IBM", "IBM"), ("Intel", "英特尔"), ("AMD", "AMD"),
+        ("Qualcomm", "高通"), ("TSMC", "台积电"),
+        ("Anthropic", "Anthropic"), ("Hugging Face", "Hugging Face"),
+        ("Stability AI", "Stability AI"),
         ("China", "中国"), ("Chinese", "中国"),
-        ("United States", "美国"), ("U.S.", "美国"),
-        ("Japan", "日本"), ("European", "欧洲"), ("Europe", "欧洲"),
+        ("U.S.", "美国"), ("United States", "美国"),
+        ("Japan", "日本"), ("Korea", "韩国"),
+        ("European", "欧洲"), ("Europe", "欧洲"),
+        ("UK", "英国"), ("Germany", "德国"), ("France", "法国"),
         ("AI model", "AI模型"), ("AI models", "AI模型"),
-        ("large language model", "大语言模型"),
+        ("AI system", "AI系统"),
+        ("AI agent", "AI代理"), ("AI agents", "AI代理"),
+        ("large language model", "大语言模型"), ("LLM", "大模型"),
+        ("LLMs", "大模型"),
         ("foundation model", "基础模型"),
+        ("open source", "开源"), ("open-source", "开源"),
         ("parameter", "参数"), ("parameters", "参数"),
         ("research", "研究"), ("paper", "论文"),
+        ("research paper", "研究论文"),
         ("announced", "宣布"), ("released", "发布"),
         ("launched", "推出"), ("introduced", "推出"),
-        ("LLM", "大模型"), ("GPU", "GPU"),
-        ("open source", "开源"), ("open-source", "开源"),
+        ("published", "发布"),
+        ("GPU", "GPU"), ("NPU", "NPU"), ("TPU", "TPU"),
+        ("API", "API"), ("SDK", "SDK"), ("toolkit", "工具包"),
+        ("benchmark", "基准测试"),
+        ("startup", "初创公司"), ("startups", "初创公司"),
+        ("funding", "融资"), ("fundraise", "融资"),
+        ("valuation", "估值"), ("revenue", "营收"),
+        ("new", "新"), ("New", "新"),
+        ("first", "首个"), ("First", "首个"),
+        ("best", "最佳"), ("Best", "最佳"),
+        ("largest", "最大"), ("Largest", "最大"),
+        ("record", "创纪录"), ("Record", "创纪录"),
+        ("breakthrough", "突破"), ("Breakthrough", "突破"),
+        ("milestone", "里程碑"), ("Milestone", "里程碑"),
+        ("Soars", "飙升"), ("Surges", "暴涨"),
+        ("Drops", "下跌"), ("Falls", "下跌"),
+        ("Rises", "上涨"), ("Grows", "增长"),
+        ("global", "全球"), ("Global", "全球"),
+        ("world", "全球"), ("World", "全球"),
+        ("stock", "股票"), ("stocks", "股票"),
+        ("earnings", "盈利"), ("Earnings", "盈利"),
+        ("invest", "投资"), ("investment", "投资"),
+        ("robot", "机器人"), ("robotics", "机器人"),
+        ("humanoid", "人形"), ("autonomous", "自主"),
+        ("model", "模型"), ("Models", "模型"),
+        ("training", "训练"), ("inference", "推理"),
+        ("company", "公司"), ("companies", "公司"),
+        ("industry", "行业"), ("market", "市场"),
+        ("technology", "技术"), ("tech", "科技"),
+        ("security", "安全"), ("privacy", "隐私"),
+        ("regulation", "监管"), ("policy", "政策"),
     ], key=lambda x: -len(x[0]))
 
     for r in records:
@@ -125,7 +165,8 @@ def _generate_cn_titles(records: list[EventRecord]) -> None:
         print("  [CN translate] No LLM key found — using keyword-only fallback")
         return
 
-    BATCH_SIZE = 20
+
+    BATCH_SIZE = 15  # smaller batches = fewer 429s
     id_to_cn: dict[str, str] = {}
     all_records = [r for r in records if r.title.strip()]
 
@@ -134,31 +175,40 @@ def _generate_cn_titles(records: list[EventRecord]) -> None:
         lines = [f"{j+1}. {r.title}" for j, r in enumerate(batch)]
         prompt = (
             "Translate these headlines into concise, fluent Chinese.\n"
-            "Rules: keep technical acronyms (GPU/NPU/LLM/API/SDK) as-is.\n"
+            "Rules: keep technical acronyms (GPU/NPU/CPU/LLM/API/EDA/EUV/DUV/HBM) as-is.\n"
             "Return one line per number, format: N. 中文翻译\n\n"
             + "\n".join(lines)
         )
-        try:
-            result = client.chat(
-                "You translate English headlines to fluent, concise Chinese. "
-                "Preserve technical acronyms. Output format: N. Chinese translation.",
-                prompt, temperature=0.1,
-            )
-            for line in result.strip().split("\n"):
-                line = line.strip()
-                parts = line.split(". ", 1)
-                if len(parts) == 2 and parts[0].isdigit():
-                    idx = int(parts[0]) - 1
-                    if 0 <= idx < len(batch):
-                        id_to_cn[batch[idx].event_id] = parts[1].strip()
-        except Exception as e:
-            print(f"  [CN translate] Batch {batch_start // BATCH_SIZE + 1} failed: {e}")
-            continue
+        for attempt in range(3):
+            try:
+                import time
+                if attempt > 0:
+                    time.sleep(5 * attempt)
+                result = client.chat(
+                    "You translate English headlines to fluent, concise Chinese. "
+                    "Preserve technical acronyms. Output format: N. Chinese translation.",
+                    prompt, temperature=0.1,
+                )
+                for line in result.strip().split("\n"):
+                    line = line.strip()
+                    parts = line.split(". ", 1)
+                    if len(parts) == 2 and parts[0].isdigit():
+                        idx = int(parts[0]) - 1
+                        if 0 <= idx < len(batch):
+                            id_to_cn[batch[idx].event_id] = parts[1].strip()
+                break
+            except Exception as e:
+                print(f"  [CN translate] Batch {batch_start // BATCH_SIZE + 1} attempt {attempt + 1} failed: {str(e)[:80]}")
+                if attempt == 2:
+                    print(f"  [CN translate] Batch {batch_start // BATCH_SIZE + 1} exhausted retries, using keyword preprocess")
+        import time
+        time.sleep(2)  # rate limiting guard
 
     for r in records:
         if r.event_id in id_to_cn and id_to_cn[r.event_id]:
             r.title_cn = id_to_cn[r.event_id]
     print(f"  [CN translate] LLM translated {len(id_to_cn)}/{len(all_records)} titles")
+
 
 
 def run_weekly(config: dict):
