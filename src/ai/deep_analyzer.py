@@ -62,7 +62,8 @@ class DeepAnalyzer:
             lines.extend([
                 f"### {i}. {r.title}",
                 "",
-                f"- **组织**: {r.organization}"
+                f"- **组织**: {r.organization}",
+                f"- **链接**: {r.url}" if r.url else f"- **组织**: {r.organization}",
                 f"- **可信度**: {r.confidence_grade} ({r.confidence_score:.0f}/100)",
                 f"- **分类**: {cats}",
                 f"- **来源**: {sources}",

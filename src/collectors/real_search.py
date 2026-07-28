@@ -63,6 +63,7 @@ def _fetch_ddg(query: str, max_results: int = 3) -> list[dict]:
                     "snippet": (r.get("body", "") or "")[:300],
                     "published": r.get("date", ""),
                     "source": r.get("source", "News"),
+                    "image": r.get("image", ""),  # DDG news thumbnail
                 })
         return results
     except ImportError:
@@ -150,6 +151,7 @@ class RealSearchCollector(BaseCollector):
                 title=r.get("title", "")[:200],
                 description=r.get("snippet", ""),
                 url=r.get("url", ""),
+                image_url=r.get("image", ""),
                 organization=self.source_name,
                 published_at=r.get("published", ""),
                 raw_data={**r, "source_key": self.source_key, "tier": self.tier,

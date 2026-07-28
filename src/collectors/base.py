@@ -24,6 +24,7 @@ class EventRecord:
     title: str
     description: str = ""
     url: str = ""
+    image_url: str = ""
     published_at: str = ""
 
     # Organization / source entity
