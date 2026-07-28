@@ -64,6 +64,103 @@ def _merge_records(records: list[EventRecord]) -> list[EventRecord]:
     return list(merged.values())
 
 
+
+def _generate_cn_titles(records: list[EventRecord]) -> None:
+    """Generate Chinese titles for ALL event records via LLM batch translation.
+
+    Strategy: LLM translates all events in batches (20 per call).
+    Falls back to keyword pre-processing only if no LLM key is available.
+    """
+    import re
+
+    # ── Preprocessing: longest-match-first keyword substitution ──
+    _PREPROCESS: list[tuple[str, str]] = sorted([
+        ("artificial intelligence", "AI"),
+        ("data center", "数据中心"), ("Data Center", "数据中心"),
+        ("DeepSeek", "DeepSeek"), ("OpenAI", "OpenAI"),
+        ("Google", "谷歌"), ("Microsoft", "微软"),
+        ("Amazon", "亚马逊"), ("Meta", "Meta"),
+        ("NVIDIA", "英伟达"), ("Nvidia", "英伟达"),
+        ("Apple", "苹果"), ("Tesla", "特斯拉"),
+        ("Samsung", "三星"), ("Sony", "索尼"),
+        ("China", "中国"), ("Chinese", "中国"),
+        ("United States", "美国"), ("U.S.", "美国"),
+        ("Japan", "日本"), ("European", "欧洲"), ("Europe", "欧洲"),
+        ("AI model", "AI模型"), ("AI models", "AI模型"),
+        ("large language model", "大语言模型"),
+        ("foundation model", "基础模型"),
+        ("parameter", "参数"), ("parameters", "参数"),
+        ("research", "研究"), ("paper", "论文"),
+        ("announced", "宣布"), ("released", "发布"),
+        ("launched", "推出"), ("introduced", "推出"),
+        ("LLM", "大模型"), ("GPU", "GPU"),
+        ("open source", "开源"), ("open-source", "开源"),
+    ], key=lambda x: -len(x[0]))
+
+    for r in records:
+        en = r.title.strip()
+        cn = en
+        for term, cn_term in _PREPROCESS:
+            idx = 0
+            while True:
+                idx = cn.find(term, idx)
+                if idx == -1:
+                    break
+                before_ok = idx == 0 or not cn[idx - 1].isalnum() and cn[idx - 1] != "'"
+                after_ok = (idx + len(term) == len(cn)
+                            or not cn[idx + len(term)].isalnum() and cn[idx + len(term)] != "'")
+                if before_ok and after_ok:
+                    cn = cn[:idx] + cn_term + cn[idx + len(term):]
+                    idx += len(cn_term)
+                else:
+                    idx += 1
+        cn = re.sub(r'\s{2,}', " ", cn).strip()
+        r.title_cn = cn if cn != en else ""
+
+    # ── LLM batch translation for ALL events ──
+    try:
+        from src.ai.llm_client import LLMClient
+        client = LLMClient()
+    except Exception:
+        print("  [CN translate] No LLM key found — using keyword-only fallback")
+        return
+
+    BATCH_SIZE = 20
+    id_to_cn: dict[str, str] = {}
+    all_records = [r for r in records if r.title.strip()]
+
+    for batch_start in range(0, len(all_records), BATCH_SIZE):
+        batch = all_records[batch_start:batch_start + BATCH_SIZE]
+        lines = [f"{j+1}. {r.title}" for j, r in enumerate(batch)]
+        prompt = (
+            "Translate these headlines into concise, fluent Chinese.\n"
+            "Rules: keep technical acronyms (GPU/NPU/LLM/API/SDK) as-is.\n"
+            "Return one line per number, format: N. 中文翻译\n\n"
+            + "\n".join(lines)
+        )
+        try:
+            result = client.chat(
+                "You translate English headlines to fluent, concise Chinese. "
+                "Preserve technical acronyms. Output format: N. Chinese translation.",
+                prompt, temperature=0.1,
+            )
+            for line in result.strip().split("\n"):
+                line = line.strip()
+                parts = line.split(". ", 1)
+                if len(parts) == 2 and parts[0].isdigit():
+                    idx = int(parts[0]) - 1
+                    if 0 <= idx < len(batch):
+                        id_to_cn[batch[idx].event_id] = parts[1].strip()
+        except Exception as e:
+            print(f"  [CN translate] Batch {batch_start // BATCH_SIZE + 1} failed: {e}")
+            continue
+
+    for r in records:
+        if r.event_id in id_to_cn and id_to_cn[r.event_id]:
+            r.title_cn = id_to_cn[r.event_id]
+    print(f"  [CN translate] LLM translated {len(id_to_cn)}/{len(all_records)} titles")
+
+
 def run_weekly(config: dict):
     """Full weekly pipeline: collect from all Tier 1 + Tier 2 sources."""
     print(f"[Weekly] Starting pipeline — {datetime.utcnow().strftime('%Y-%m-%d %H:%M')} UTC")
@@ -117,6 +214,11 @@ def run_weekly(config: dict):
         grade_counts[g] = grade_counts.get(g, 0) + 1
     grade_str = ", ".join(f"{k}:{v}" for k, v in sorted(grade_counts.items()))
     print(f"[Weekly] Filtered+Scored: {len(new_records)} events — {grade_str}")
+
+    # Generate Chinese titles (LLM batch translation with keyword preprocess)
+    _generate_cn_titles(new_records)
+    cn_count = sum(1 for r in new_records if r.title_cn)
+    print(f"[Weekly] CN titles generated: {cn_count}/{len(new_records)}")
 
     # AI deep analysis
     deep_analysis = ""
