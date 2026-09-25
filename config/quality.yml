@@ -9,31 +9,23 @@ weights:
   business_signal: 10         # 商业信号 — 融资/收购/人才流动/战略调整
   time_sensitivity: 5         # 时间敏感性 — 事件的即时性和不可逆性
 
-# 置信度等级
-confidence:
-  grade_a:
-    threshold: 80
-    label: "A"
-    description: "多源交叉验证，至少1个Tier 1官方 + 2个Tier 2独立来源确认"
-  grade_b:
-    threshold: 60
-    label: "B"
-    description: "单一Tier 1官方源或两个独立Tier 2源，基本可信"
-  grade_c:
-    threshold: 40
-    label: "C"
-    description: "单一Tier 2源，需后续追踪确认"
-  grade_d:
-    threshold: 0
-    label: "D"
-    description: "信号微弱，仅供参考"
+# 置信度评分（跨生态独立源交叉验证）
+scoring:
+  tier_1_weight: 40      # Tier 1 源每个 40 分
+  tier_2_weight: 25      # Tier 2 源每个 25 分
+  max_score: 100         # 封顶
+  min_score_for_A: 80    # A 级 = 2 个 Tier1 生态或等价组合
+  min_score_for_B: 60    # B 级 = Tier1 + Tier2 交叉验证
+  min_score_for_C: 40    # C 级 = 单一 Tier1 源确认
+                          # D 级 = 40 以下
 
-# 质量过滤
-filters:
-  exclude_fork: true
-  max_inactive_days: 90
-  require_license: false
-  min_readme_length: 0
+# 质量过滤阈值
+filter:
+  min_title_length: 10     # 标题最短
+  min_desc_length: 30      # 描述最短
+  require_citation: true   # 必须有关联源
+  max_age_days: 14         # 最多 14 天前
+
 
 # 六维分类体系
 categories:
@@ -136,3 +128,17 @@ category_mapping:
     - "战略"
     - "组织架构"
     - "reorganization"
+
+# 生态系统独立权重（跨源交叉验证用）
+ecosystem_weights:
+  academia: 1.0
+  cn_bigtech: 1.0
+  cn_llm: 1.0
+  cn_tech_media: 0.6
+  cn_video_gen: 1.0
+  en_tech_media: 0.7
+  image_gen: 1.0
+  industry_research: 0.8
+  open_source: 0.8
+  us_bigtech: 1.0
+  video_gen: 1.0

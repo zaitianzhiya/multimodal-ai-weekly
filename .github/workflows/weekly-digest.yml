@@ -42,7 +42,8 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "actions@github.com"
-          git add -f output/
-          git diff --cached --quiet || git commit -m "Weekly: $(date +%Y-W%V) 多模态AI周报"
+          mkdir -p data
+          git add -f output/ data/
+          git diff --cached --quiet || git commit -m "Weekly: $(date +%G-W%V) 多模态AI周报"
           git pull --rebase origin main
           git push

@@ -1,6 +1,7 @@
 """Orchestrator: collect → filter → score → AI → render pipeline."""
 
 import argparse
+import re
 import os
 import sys
 import yaml
@@ -29,22 +30,29 @@ def load_config() -> dict:
 
 
 def _auto_categorize(record: EventRecord, config: dict) -> list[str]:
-    """Auto-classify based on title + description + keyword matching."""
-    text = f"{record.title} {record.description}".lower()
+    """Auto-classify based on title keyword matching (word-boundary for ASCII, substring for CJK)."""
+    text = (record.title or "").lower()
     category_mapping = config.get("category_mapping", {})
     matched: list[str] = []
     for cat_id, keywords in category_mapping.items():
-        if any(kw.lower() in text for kw in keywords):
-            # Use category name from config
-            cat_configs = config.get("categories", [])
-            cat_name = cat_id
-            for cc in cat_configs:
-                if cc.get("id") == cat_id:
-                    cat_name = cc.get("name", cat_id)
-                    break
-            matched.append(cat_name)
-    return matched if matched else []
+        for kw in keywords:
+            if _kw_match((kw or "").lower(), text):
+                cat_name = cat_id
+                for cc in config.get("categories", []):
+                    if cc.get("id") == cat_id:
+                        cat_name = cc.get("name", cat_id)
+                        break
+                matched.append(cat_name)
+                break
+    return matched
 
+
+def _kw_match(kw: str, text: str) -> bool:
+    if not kw:
+        return False
+    if any("\u4e00" <= ch <= "\u9fff" for ch in kw):
+        return kw in text
+    return re.search(rf"(?<![a-z0-9]){re.escape(kw)}(?![a-z0-9])", text) is not None
 
 def _merge_records(records: list[EventRecord]) -> list[EventRecord]:
     """Merge records with same event_id, combining citation chains."""
@@ -69,93 +77,21 @@ def _generate_cn_titles(records: list[EventRecord]) -> None:
     """Generate Chinese titles for ALL event records via LLM batch translation.
 
     Strategy: LLM translates all events in batches (20 per call).
-    Falls back to keyword pre-processing only if no LLM key is available.
+    Skipped entirely when no LLM key is configured (keyword substitution
+    produced mixed-language garbage).
     """
+    try:
+        from src.ai.llm_client import LLMClient
+        _llm_client = LLMClient()
+    except Exception:
+        _llm_client = None
+    if _llm_client is None:
+        # No LLM key configured — leave titles untranslated instead of
+        # emitting mixed-language keyword substitutions.
+        print("[CN translate] No LLM key — skipping Chinese title generation")
+        return
+
     import re
-
-    # ── Preprocessing: longest-match-first keyword substitution ──
-    _PREPROCESS: list[tuple[str, str]] = sorted([
-        ("artificial intelligence", "AI"),
-        ("data center", "数据中心"), ("Data Center", "数据中心"),
-        ("DeepSeek", "DeepSeek"), ("OpenAI", "OpenAI"),
-        ("Google", "谷歌"), ("Microsoft", "微软"),
-        ("Amazon", "亚马逊"), ("Meta", "Meta"),
-        ("NVIDIA", "英伟达"), ("Nvidia", "英伟达"), ("Nvidia's", "英伟达"),
-        ("Apple", "苹果"), ("Tesla", "特斯拉"),
-        ("Samsung", "三星"), ("Sony", "索尼"),
-        ("IBM", "IBM"), ("Intel", "英特尔"), ("AMD", "AMD"),
-        ("Qualcomm", "高通"), ("TSMC", "台积电"),
-        ("Anthropic", "Anthropic"), ("Hugging Face", "Hugging Face"),
-        ("Stability AI", "Stability AI"),
-        ("China", "中国"), ("Chinese", "中国"),
-        ("U.S.", "美国"), ("United States", "美国"),
-        ("Japan", "日本"), ("Korea", "韩国"),
-        ("European", "欧洲"), ("Europe", "欧洲"),
-        ("UK", "英国"), ("Germany", "德国"), ("France", "法国"),
-        ("AI model", "AI模型"), ("AI models", "AI模型"),
-        ("AI system", "AI系统"),
-        ("AI agent", "AI代理"), ("AI agents", "AI代理"),
-        ("large language model", "大语言模型"), ("LLM", "大模型"),
-        ("LLMs", "大模型"),
-        ("foundation model", "基础模型"),
-        ("open source", "开源"), ("open-source", "开源"),
-        ("parameter", "参数"), ("parameters", "参数"),
-        ("research", "研究"), ("paper", "论文"),
-        ("research paper", "研究论文"),
-        ("announced", "宣布"), ("released", "发布"),
-        ("launched", "推出"), ("introduced", "推出"),
-        ("published", "发布"),
-        ("GPU", "GPU"), ("NPU", "NPU"), ("TPU", "TPU"),
-        ("API", "API"), ("SDK", "SDK"), ("toolkit", "工具包"),
-        ("benchmark", "基准测试"),
-        ("startup", "初创公司"), ("startups", "初创公司"),
-        ("funding", "融资"), ("fundraise", "融资"),
-        ("valuation", "估值"), ("revenue", "营收"),
-        ("new", "新"), ("New", "新"),
-        ("first", "首个"), ("First", "首个"),
-        ("best", "最佳"), ("Best", "最佳"),
-        ("largest", "最大"), ("Largest", "最大"),
-        ("record", "创纪录"), ("Record", "创纪录"),
-        ("breakthrough", "突破"), ("Breakthrough", "突破"),
-        ("milestone", "里程碑"), ("Milestone", "里程碑"),
-        ("Soars", "飙升"), ("Surges", "暴涨"),
-        ("Drops", "下跌"), ("Falls", "下跌"),
-        ("Rises", "上涨"), ("Grows", "增长"),
-        ("global", "全球"), ("Global", "全球"),
-        ("world", "全球"), ("World", "全球"),
-        ("stock", "股票"), ("stocks", "股票"),
-        ("earnings", "盈利"), ("Earnings", "盈利"),
-        ("invest", "投资"), ("investment", "投资"),
-        ("robot", "机器人"), ("robotics", "机器人"),
-        ("humanoid", "人形"), ("autonomous", "自主"),
-        ("model", "模型"), ("Models", "模型"),
-        ("training", "训练"), ("inference", "推理"),
-        ("company", "公司"), ("companies", "公司"),
-        ("industry", "行业"), ("market", "市场"),
-        ("technology", "技术"), ("tech", "科技"),
-        ("security", "安全"), ("privacy", "隐私"),
-        ("regulation", "监管"), ("policy", "政策"),
-    ], key=lambda x: -len(x[0]))
-
-    for r in records:
-        en = r.title.strip()
-        cn = en
-        for term, cn_term in _PREPROCESS:
-            idx = 0
-            while True:
-                idx = cn.find(term, idx)
-                if idx == -1:
-                    break
-                before_ok = idx == 0 or not cn[idx - 1].isalnum() and cn[idx - 1] != "'"
-                after_ok = (idx + len(term) == len(cn)
-                            or not cn[idx + len(term)].isalnum() and cn[idx + len(term)] != "'")
-                if before_ok and after_ok:
-                    cn = cn[:idx] + cn_term + cn[idx + len(term):]
-                    idx += len(cn_term)
-                else:
-                    idx += 1
-        cn = re.sub(r'\s{2,}', " ", cn).strip()
-        r.title_cn = cn if cn != en else ""
 
     # ── LLM batch translation for ALL events ──
     try:
@@ -183,7 +119,7 @@ def _generate_cn_titles(records: list[EventRecord]) -> None:
             try:
                 import time
                 if attempt > 0:
-                    time.sleep(5 * attempt)
+                    time.sleep(60)
                 result = client.chat(
                     "You translate English headlines to fluent, concise Chinese. "
                     "Preserve technical acronyms. Output format: N. Chinese translation.",
@@ -242,19 +178,22 @@ def run_weekly(config: dict):
     merged = _merge_records(records)
     print(f"[Weekly] Merged: {len(merged)} unique events (from {len(records)} raw)")
 
-    dedup = Deduplicator(str(ROOT / "data" / "state.json"))
-    new_records, seen = dedup.deduplicate(merged)
+    qf = QualityFilter(config)
+    filtered, qstats = qf.filter(merged)
+    print(f"[Weekly] Quality filter: {qstats}")
+    if not filtered:
+        print("[Weekly] No records passed quality filter.")
+        return
+
+    dedup = Deduplicator(str(ROOT / "data" / "dedup_state.json"))
+    new_records, seen = dedup.deduplicate(filtered)
     print(f"[Weekly] Dedup: {len(new_records)} new / {seen} already seen")
 
     if not new_records:
         print("[Weekly] All events already seen this cycle.")
         return
 
-    # Filter + score
-    qf = QualityFilter(config)
     scorer = Scorer(config)
-
-    new_records = qf.filter(new_records)
     new_records = scorer.score(new_records)
     new_records.sort(key=lambda r: r.confidence_score, reverse=True)
 
@@ -285,15 +224,19 @@ def run_weekly(config: dict):
         print(f"[Weekly] AI skipped (will render data-only report): {e}")
 
     # Render
-    renderer = MarkdownRenderer(str(ROOT / "output"))
+    category_order = [c.get("name") for c in config.get("categories", [])]
+    renderer = MarkdownRenderer(str(ROOT / "output"), category_order=category_order)
     stats = {
         "本周采集": len(records),
-        "去重后": len(new_records),
+        "历史已见": seen,
+        "质量过滤排除": sum(qstats.values()) - qstats["kept"] - qstats["fallback_excluded"],
+        "占位骨架排除": qstats["fallback_excluded"],
         "新事件": len(new_records),
         "可信度分布": grade_str,
         "独立生态覆盖": _eco_coverage(new_records),
     }
     renderer.render_weekly_report(new_records, deep_analysis=deep_analysis, stats=stats)
+    dedup.save()
 
     print(f"[Weekly] ✅ Done — report written to output/")
     print(f"[Weekly] Top event: {new_records[0].title[:80] if new_records else 'N/A'}")
