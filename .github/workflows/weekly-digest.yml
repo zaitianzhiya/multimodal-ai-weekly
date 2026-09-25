@@ -4,6 +4,12 @@ on:
   schedule:
     - cron: '25 10 * * 1'
   workflow_dispatch:
+    inputs:
+      week:
+        description: 'Target week (YYYY-Wnn), empty = current week'
+        required: false
+        type: string
+
 
 concurrency:
   group: multimodal-weekly
@@ -29,6 +35,7 @@ jobs:
         run: python run.py --mode weekly
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          REPORT_WEEK: ${{ github.event.inputs.week || '' }}
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
       - name: Commit and push
