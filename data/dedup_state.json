@@ -1,0 +1,154 @@
+{
+  "events": {
+    "evt:2ac7e4641c4a": {
+      "first_seen_week": "2026-W40",
+      "last_seen_week": "2026-W40",
+      "title": "OpenAI launches faster and more efficient GPT-6 Sol and Luna models."
+    },
+    "evt:acfed56343fa": {
+      "first_seen_week": "2026-W40",
+      "last_seen_week": "2026-W40",
+      "title": "OpenAI Says Agents Leaked 53 Private Images From ChatGPT Users and Shared Them Online"
+    },
+    "evt:b7914f2fd69f": {
+      "first_seen_week": "2026-W40",
+      "last_seen_week": "2026-W40",
+      "title": "Google wants Gemini 4 out ‘much earlier’ than the end of the year"
+    },
+    "evt:ee25b685db0d": {
+      "first_seen_week": "2026-W40",
+      "last_seen_week": "2026-W40",
+      "title": "Leaked Gemini 4 Pro Benchmarks Signal Google’s Return to the Top of AI"
+    },
+    "evt:121cb60c5172": {
+      "first_seen_week": "2026-W40",
+      "last_seen_week": "2026-W40",
+      "title": "輕薄高效！華碩 Googlebook 14 登場 搭載英特爾 AI 處理器與 Googlebook OS"
+    },
+    "evt:ba3afb46f2e4": {
+      "first_seen_week": "2026-W40",
+      "last_seen_week": "2026-W40",
+      "title": "NLPに深層学習を持ち込んだリチャード・ソッチャーが次に賭ける「AIにAIを研究させる」挑戦【前編】（TECHBLITZ）｜dメニュー ..."
+    },
+    "evt:ef0ec5c4c4e4": {
+      "first_seen_week": "2026-W40",
+      "last_seen_week": "2026-W40",
+      "title": "Amazon Seller Assistant plugin brings seller data to Claude"
+    },
+    "evt:e86e7288001a": {
+      "first_seen_week": "2026-W40",
+      "last_seen_week": "2026-W40",
+      "title": "Windows Is About to Change Forever: My Predictions for Microsoft's Big October..."
+    },
+    "evt:36b24d529c1a": {
+      "first_seen_week": "2026-W40",
+      "last_seen_week": "2026-W40",
+      "title": "GPT-6 Astra detecta errores IKEA con 80% en el FAB de Epoch AI – El Ecosistema Startup"
+    },
+    "evt:eba9a029c1d2": {
+      "first_seen_week": "2026-W40",
+      "last_seen_week": "2026-W40",
+      "title": "AI加速破解量子加密挑戰 SIKE協議一小時內淪陷"
+    },
+    "evt:ac9af80b4f80": {
+      "first_seen_week": "2026-W40",
+      "last_seen_week": "2026-W40",
+      "title": "Regulación IA: la UE ya multa, EE.UU. bloquea a los estados"
+    },
+    "evt:5bac1dde2799": {
+      "first_seen_week": "2026-W40",
+      "last_seen_week": "2026-W40",
+      "title": "热点丨字节京东布局世界模型，瞄准空间计算生态卡位"
+    },
+    "evt:53c69f0707ee": {
+      "first_seen_week": "2026-W40",
+      "last_seen_week": "2026-W40",
+      "title": "\"Don't draw pixels, guess the state\"—A gentle introduction to LeCun's JEPA for autonomous driving engineers"
+    },
+    "evt:69a696550056": {
+      "first_seen_week": "2026-W40",
+      "last_seen_week": "2026-W40",
+      "title": "Claude Opus 5.5 and the half-price GPT-6 were released on the same day. 10 days after saying 'let's slow down' | A practitioner's summary of AI news from September 2026"
+    },
+    "evt:72be891e3935": {
+      "first_seen_week": "2026-W40",
+      "last_seen_week": "2026-W40",
+      "title": "¿Es realmente inteligente la inteligencia artificial?"
+    },
+    "evt:0208d2baff2a": {
+      "first_seen_week": "2026-W40",
+      "last_seen_week": "2026-W40",
+      "title": "Very Large Telescope"
+    },
+    "evt:4716900d4bcd": {
+      "first_seen_week": "2026-W40",
+      "last_seen_week": "2026-W40",
+      "title": "神秘“太空兔”抢占全球模型调用榜榜首，网友推测为MiniMax新模型"
+    },
+    "evt:3e265baff61b": {
+      "first_seen_week": "2026-W40",
+      "last_seen_week": "2026-W40",
+      "title": "神秘“太空兔”登顶双榜，Flash 模型迎来新“御三家”"
+    },
+    "evt:6ec9ed2498ae": {
+      "first_seen_week": "2026-W40",
+      "last_seen_week": "2026-W40",
+      "title": "神秘“太空兔”登顶双榜，Flash 模型迎来新“御三家”"
+    },
+    "evt:8b242f83d3e6": {
+      "first_seen_week": "2026-W40",
+      "last_seen_week": "2026-W40",
+      "title": "用AI造的！刚刚，代季峰团队首个模型开源"
+    },
+    "evt:88c57327486e": {
+      "first_seen_week": "2026-W40",
+      "last_seen_week": "2026-W40",
+      "title": "Агрегаторы нейросетей 2026: лучшие AI-сервисы в России"
+    },
+    "evt:5a92434d3632": {
+      "first_seen_week": "2026-W40",
+      "last_seen_week": "2026-W40",
+      "title": "ARD/ZDF-Medienstudie 2026: Skeptisch im Kopf, Daumen auf Autopilot"
+    },
+    "evt:cf00df229f62": {
+      "first_seen_week": "2026-W40",
+      "last_seen_week": "2026-W40",
+      "title": "AI startup urges optimism from Europe despite safety fears"
+    },
+    "evt:c3bc2b226450": {
+      "first_seen_week": "2026-W40",
+      "last_seen_week": "2026-W40",
+      "title": "Walmart holt gegen Amazon auf"
+    },
+    "evt:04a435b20625": {
+      "first_seen_week": "2026-W40",
+      "last_seen_week": "2026-W40",
+      "title": "Kuaishou’s AI Video Spinoff Unveils New Model in ByteDance Chase"
+    },
+    "evt:3ef1e71e836a": {
+      "first_seen_week": "2026-W40",
+      "last_seen_week": "2026-W40",
+      "title": "How I would expand Heathrow (without a third runway)"
+    },
+    "evt:ffa9b942ea76": {
+      "first_seen_week": "2026-W40",
+      "last_seen_week": "2026-W40",
+      "title": "Sagimet Biosciences (SGMT): Phase 3 Trial, FDA Path and Cash Runway Set Up Key..."
+    },
+    "evt:0993df0b4d65": {
+      "first_seen_week": "2026-W40",
+      "last_seen_week": "2026-W40",
+      "title": "Anniston wins $18.5M federal grant to improve airport runway supporting Army..."
+    },
+    "evt:64e6d4daf3b6": {
+      "first_seen_week": "2026-W40",
+      "last_seen_week": "2026-W40",
+      "title": "Top 3 Defense Stocks With Revenue Growth Up To 18%"
+    },
+    "evt:b96591d86a36": {
+      "first_seen_week": "2026-W40",
+      "last_seen_week": "2026-W40",
+      "title": "RWAY Looks 18.8% Undervalued on GF Value™ Amid Debt Offering Pla"
+    }
+  }
+}
