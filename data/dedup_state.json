@@ -77,7 +77,7 @@
     },
     "evt:0208d2baff2a": {
       "first_seen_week": "2026-W40",
-      "last_seen_week": "2026-W40",
+      "last_seen_week": "2026-W42",
       "title": "Very Large Telescope"
     },
     "evt:4716900d4bcd": {
@@ -152,7 +152,7 @@
     },
     "evt:b14683fd1d57": {
       "first_seen_week": "2026-W41",
-      "last_seen_week": "2026-W41",
+      "last_seen_week": "2026-W42",
       "title": "OpenAI delays GPT-6.1 Astra after simulation results"
     },
     "evt:c8625178a439": {
@@ -262,7 +262,7 @@
     },
     "evt:2a57643ab435": {
       "first_seen_week": "2026-W41",
-      "last_seen_week": "2026-W41",
+      "last_seen_week": "2026-W42",
       "title": "[데일리 정치 브리핑] (10월 2일) 경계선을 다시 긋는 정치…DMZ 대응과 형사사법 대전환의 첫날"
     },
     "evt:a37b02f09e05": {
@@ -279,6 +279,141 @@
       "first_seen_week": "2026-W41",
       "last_seen_week": "2026-W41",
       "title": "Petróleo Brasileiro S.A. - Petrobras (PBRA) Up 14.9% — Should I Make My Move Here?"
+    },
+    "evt:99d6db45d275": {
+      "first_seen_week": "2026-W42",
+      "last_seen_week": "2026-W42",
+      "title": "Google Launches New Website to Detect AI Fakes, But Don't Assume It's Perfect"
+    },
+    "evt:9c449541d708": {
+      "first_seen_week": "2026-W42",
+      "last_seen_week": "2026-W42",
+      "title": "Google now lets anyone check if an image was made with AI"
+    },
+    "evt:957b5c781439": {
+      "first_seen_week": "2026-W42",
+      "last_seen_week": "2026-W42",
+      "title": "Google just launched a free AI detector for music, videos, and images — here's h..."
+    },
+    "evt:5c9835068661": {
+      "first_seen_week": "2026-W42",
+      "last_seen_week": "2026-W42",
+      "title": "Google Opens SynthID Detector Globally With Partner AI Content Checks"
+    },
+    "evt:b4479e2aec1c": {
+      "first_seen_week": "2026-W42",
+      "last_seen_week": "2026-W42",
+      "title": "Google opens SynthID Detector to all to spot AI images, video, audio"
+    },
+    "evt:083f41e45a0e": {
+      "first_seen_week": "2026-W42",
+      "last_seen_week": "2026-W42",
+      "title": "Anthropic's Thariq Shihipar Recommends Using Artifacts"
+    },
+    "evt:8a2bfefb2f3d": {
+      "first_seen_week": "2026-W42",
+      "last_seen_week": "2026-W42",
+      "title": "...Warns He's 90% Certain China Has Spies Inside OpenAI And Anthropic, And..."
+    },
+    "evt:fdfaedb2af11": {
+      "first_seen_week": "2026-W42",
+      "last_seen_week": "2026-W42",
+      "title": "Google Cloud unveils persistent Gemini Agents for long-running tasks, and they..."
+    },
+    "evt:8eeb6a35d71b": {
+      "first_seen_week": "2026-W42",
+      "last_seen_week": "2026-W42",
+      "title": "Google Unveils AI Agent For Enterprise Workflow"
+    },
+    "evt:542b135da775": {
+      "first_seen_week": "2026-W42",
+      "last_seen_week": "2026-W42",
+      "title": "Meta Unveils Frontier Muse Wonder Model, Reclaiming Competitive Ground In AI..."
+    },
+    "evt:242e1727b04c": {
+      "first_seen_week": "2026-W42",
+      "last_seen_week": "2026-W42",
+      "title": "Sicurezza degli LLM: quando ridurre i costi significa aumentare la superficie d’attacco"
+    },
+    "evt:6441640fdb62": {
+      "first_seen_week": "2026-W42",
+      "last_seen_week": "2026-W42",
+      "title": "VL E-Governance & IT"
+    },
+    "evt:f31b7b605107": {
+      "first_seen_week": "2026-W42",
+      "last_seen_week": "2026-W42",
+      "title": "无问芯穹完成 23 亿元 C 轮融资，单轮及累计融资额均创中国 AI 原生基础设施赛道最高纪录"
+    },
+    "evt:306edbb68384": {
+      "first_seen_week": "2026-W42",
+      "last_seen_week": "2026-W42",
+      "title": "阿里Qoder上线Fast模式 生成速度提升超150%"
+    },
+    "evt:3cebb4f93cc6": {
+      "first_seen_week": "2026-W42",
+      "last_seen_week": "2026-W42",
+      "title": "5 Things to Know"
+    },
+    "evt:935fddfdc14b": {
+      "first_seen_week": "2026-W42",
+      "last_seen_week": "2026-W42",
+      "title": "Compare 5-year ARM Mortgage Rates"
+    },
+    "evt:a0ebaf1b6645": {
+      "first_seen_week": "2026-W42",
+      "last_seen_week": "2026-W42",
+      "title": "【iOS版リリース】Adobe Stock特化のMidjourneyプロンプト生成アプリ『MidStock』公開！月300円から出品作業を爆速化"
+    },
+    "evt:9ed9ccd39d72": {
+      "first_seen_week": "2026-W42",
+      "last_seen_week": "2026-W42",
+      "title": "How to add music to videos? When the lengths of MP3 and MP4 do not match"
+    },
+    "evt:5fcfead8c969": {
+      "first_seen_week": "2026-W42",
+      "last_seen_week": "2026-W42",
+      "title": "Chania’s Avocado Country Is Taking Its Crop Seriously"
+    },
+    "evt:4d7ec42f525f": {
+      "first_seen_week": "2026-W42",
+      "last_seen_week": "2026-W42",
+      "title": "Major Global AI News This Week (2nd Week of October 2026)"
+    },
+    "evt:e4724f8c5172": {
+      "first_seen_week": "2026-W42",
+      "last_seen_week": "2026-W42",
+      "title": "AI大模型周榜：Claude新模型登顶智能体"
+    },
+    "evt:ab521feabae7": {
+      "first_seen_week": "2026-W42",
+      "last_seen_week": "2026-W42",
+      "title": "Animx: все AI-модели видео в одной подписке"
+    },
+    "evt:59aaa5d498f3": {
+      "first_seen_week": "2026-W42",
+      "last_seen_week": "2026-W42",
+      "title": "Ultragenyx (RARE) EMA Validation of MPS IIIA Gene Therapy: Inflection Point or..."
+    },
+    "evt:ac29e521d415": {
+      "first_seen_week": "2026-W42",
+      "last_seen_week": "2026-W42",
+      "title": "Zacks Industry Outlook Highlights ICU Medical, Neogen and Trulieve Cannabis"
+    },
+    "evt:46edd1c45119": {
+      "first_seen_week": "2026-W42",
+      "last_seen_week": "2026-W42",
+      "title": "Riyadh Airport Attacks Damage Terminals at $7.2B Expansion Site"
+    },
+    "evt:8fcf1c23a8e7": {
+      "first_seen_week": "2026-W42",
+      "last_seen_week": "2026-W42",
+      "title": "AI Infrastructure Stocks With Real Earnings Leverage From Ciena, Micron And KLA"
+    },
+    "evt:5cdd0f6685ac": {
+      "first_seen_week": "2026-W42",
+      "last_seen_week": "2026-W42",
+      "title": "The Future of Pop Music Is Approaching and Black Women Are Leading the Charge — Why Aren’t They Also Leading the Charts? (Critic’s Take)"
     }
   }
 }
