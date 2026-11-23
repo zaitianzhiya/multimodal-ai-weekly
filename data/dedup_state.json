@@ -1159,6 +1159,156 @@
       "first_seen_week": "2026-W47",
       "last_seen_week": "2026-W47",
       "title": "A video model that learned to move robots is now open for anyone to run - The..."
+    },
+    "evt:9b93f037643d": {
+      "first_seen_week": "2026-W48",
+      "last_seen_week": "2026-W48",
+      "title": "OpenAI Reports Model-Driven Gains in AMD Flagship Chip Designs"
+    },
+    "evt:7a8ea60b51f3": {
+      "first_seen_week": "2026-W48",
+      "last_seen_week": "2026-W48",
+      "title": "OpenAI releases GPT-6.2 Astra to regain performance lead from Claude Fable 5.2"
+    },
+    "evt:068eedfcf1db": {
+      "first_seen_week": "2026-W48",
+      "last_seen_week": "2026-W48",
+      "title": "OpenAI releases its updated GPT-6.2 Astra model."
+    },
+    "evt:18e2a7d8cbfa": {
+      "first_seen_week": "2026-W48",
+      "last_seen_week": "2026-W48",
+      "title": "DeepMind’s AI agents found cheaper quantum algorithms, and proved them"
+    },
+    "evt:1b5a45fcef06": {
+      "first_seen_week": "2026-W48",
+      "last_seen_week": "2026-W48",
+      "title": "Google DeepMind and Google Quantum AI use AI agents to build formally verified quantum algorithms"
+    },
+    "evt:7571b643b540": {
+      "first_seen_week": "2026-W48",
+      "last_seen_week": "2026-W48",
+      "title": "Google DeepMind Agent Teams Discover Lean-Verified Quantum Algorithms"
+    },
+    "evt:954fc322b249": {
+      "first_seen_week": "2026-W48",
+      "last_seen_week": "2026-W48",
+      "title": "AI Mode adding Google Drive, Wallet, & Gemini app integration"
+    },
+    "evt:e8430f144dd0": {
+      "first_seen_week": "2026-W48",
+      "last_seen_week": "2026-W48",
+      "title": "What is Claude? Everything you need to know about Anthropic's AI powerhouse"
+    },
+    "evt:c8367f86b96f": {
+      "first_seen_week": "2026-W48",
+      "last_seen_week": "2026-W48",
+      "title": "Anthropic worker claims to have solved a Holy Grail of math problems with the..."
+    },
+    "evt:9f400902bd66": {
+      "first_seen_week": "2026-W48",
+      "last_seen_week": "2026-W48",
+      "title": "Anthropic becomes S.F.'s most valuable company in blockbuster IPO worth over $2..."
+    },
+    "evt:d3cd78f9dee8": {
+      "first_seen_week": "2026-W48",
+      "last_seen_week": "2026-W48",
+      "title": "Regional Anesthesia Shows No Mortality Advantage Over General Anesthesia in Hip Surgery"
+    },
+    "evt:0e9ba24405b9": {
+      "first_seen_week": "2026-W48",
+      "last_seen_week": "2026-W48",
+      "title": "智谱GLM-5.4上线，采用循环推理架构以更少token完成思考"
+    },
+    "evt:2e4d0672dca0": {
+      "first_seen_week": "2026-W48",
+      "last_seen_week": "2026-W48",
+      "title": "智谱GLM-5.5年底出3万亿参数，能追上Opus5.5吗？"
+    },
+    "evt:e502829f0016": {
+      "first_seen_week": "2026-W48",
+      "last_seen_week": "2026-W48",
+      "title": "担心数据安全问题，GLM-5.4国产模型靠谱吗？"
+    },
+    "evt:19ec47bf5cb1": {
+      "first_seen_week": "2026-W48",
+      "last_seen_week": "2026-W48",
+      "title": "AI日报：谷歌给Gemini补上GIF生成功能；GLM-5.4悄然上线Coding Plan；MiniMax 拿内部模型开刀密码学"
+    },
+    "evt:640f338b2d9b": {
+      "first_seen_week": "2026-W48",
+      "last_seen_week": "2026-W48",
+      "title": "How do I make an image from text with AI?"
+    },
+    "evt:8dab3165117d": {
+      "first_seen_week": "2026-W48",
+      "last_seen_week": "2026-W48",
+      "title": "The Double Alignment Problem: Civil-Military Relations in the Age of Artificial Intelligence"
+    },
+    "evt:d63b4077c705": {
+      "first_seen_week": "2026-W48",
+      "last_seen_week": "2026-W48",
+      "title": "Are There Any AI Tools That Can Convert Photos Into Paintings?"
+    },
+    "evt:3b4194be095a": {
+      "first_seen_week": "2026-W48",
+      "last_seen_week": "2026-W48",
+      "title": "Billionaire Daniel Loeb Swaps Amazon for Meta, Nvidia and Microsoft in Q3 — Meta..."
+    },
+    "evt:69afbce524b8": {
+      "first_seen_week": "2026-W48",
+      "last_seen_week": "2026-W48",
+      "title": "Black Forest Labs: FLUX 3 Takes Visual AI into Robotics"
+    },
+    "evt:0ccc698b8436": {
+      "first_seen_week": "2026-W48",
+      "last_seen_week": "2026-W48",
+      "title": "Connecticut police use AI with few statewide rules. Here’s what’s known"
+    },
+    "evt:7ae99ba1efde": {
+      "first_seen_week": "2026-W48",
+      "last_seen_week": "2026-W48",
+      "title": "AI大模型周榜：新模型密集入榜"
+    },
+    "evt:5b81dfcc9216": {
+      "first_seen_week": "2026-W48",
+      "last_seen_week": "2026-W48",
+      "title": "AI大模型周榜：Gemini 4 Neon新登综合第3，Qwen4-Max首秀第18"
+    },
+    "evt:9b1cb99a73b1": {
+      "first_seen_week": "2026-W48",
+      "last_seen_week": "2026-W48",
+      "title": "AI 大模型周榜：谷歌 Gemini 4 Neon 新登综合第 3，阿里 Qwen4-Max 智能体首秀第 18"
+    },
+    "evt:bf3751f7cefc": {
+      "first_seen_week": "2026-W48",
+      "last_seen_week": "2026-W48",
+      "title": "seedance-api"
+    },
+    "evt:bb1ab54ca52c": {
+      "first_seen_week": "2026-W48",
+      "last_seen_week": "2026-W48",
+      "title": "Bristol-Myers Squibb: Too Cheap To Ignore At 9x Earnings"
+    },
+    "evt:bf730093e6e7": {
+      "first_seen_week": "2026-W48",
+      "last_seen_week": "2026-W48",
+      "title": "SFO will flood this week from huge tides, federal expert says"
+    },
+    "evt:fd692b1d8fba": {
+      "first_seen_week": "2026-W48",
+      "last_seen_week": "2026-W48",
+      "title": "Landing fees set for Aspen Airport"
+    },
+    "evt:72dcf4146d45": {
+      "first_seen_week": "2026-W48",
+      "last_seen_week": "2026-W48",
+      "title": "Why Owning SpaceX Through ETFs Could Make More Sense Now"
+    },
+    "evt:bb34fa623b7d": {
+      "first_seen_week": "2026-W48",
+      "last_seen_week": "2026-W48",
+      "title": "Applied Digital Stock Gets A Lift From New 18 Year Lease"
     }
   }
 }
